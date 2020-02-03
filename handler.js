@@ -5,9 +5,11 @@ const express = require('express');
 const app = express();
 
 app.get('/tasks', function (req, res) {
-  //res.send('Hello World!');
+  //res.send('Hello World!'); - greyed out because res.json sets up headers the way we want.
+
   res.json({
     message: 'Is this thing on?',
+    // Homework goes here - cut and paste hardcoded React State!!!!
   });
 })
 
