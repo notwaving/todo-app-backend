@@ -1,13 +1,15 @@
 'use strict';
 
+import uuidv4 from 'uuid/v4';
+
 const serverless = require('serverless-http');
 const express = require('express');
 const app = express();
 
 const tasks = [
-  { id: 1, description: "Do yoga", category: "Health", completed: false },
-  { id: 2, description: "Put on laundry", category: "Housework", completed: false },
-  { id: 3, description: "Email Beckie", category: "Admin", completed: false }
+  { id: uuidv4(), description: "Do yoga", category: "Health", completed: false },
+  { id: uuidv4(), description: "Put on laundry", category: "Housework", completed: false },
+  { id: uuidv4(), description: "Email Beckie", category: "Admin", completed: false }
 ]
 
 app.get('/tasks', function (req, res) {
