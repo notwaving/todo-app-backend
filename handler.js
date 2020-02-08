@@ -8,8 +8,12 @@ app.get('/tasks', function (req, res) {
   //res.send('Hello World!'); - greyed out because res.json sets up headers the way we want.
 
   res.json({
-    message: 'Is this thing on?',
-    // Homework goes here - cut and paste hardcoded React State!!!!
+    //message: 'Is this thing on?',
+    [
+      { id: uuidv4(), description: "Do yoga", category: "Health", completed: false },
+      { id: uuidv4(), description: "Put on laundry", category: "Housework", completed: false },
+      { id: uuidv4(), description: "Email Beckie", category: "Admin", completed: false }
+    ]
   });
 })
 
