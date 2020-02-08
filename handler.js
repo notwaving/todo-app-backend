@@ -9,7 +9,7 @@ app.get('/tasks', function (req, res) {
 
   res.json({
     //message: 'Is this thing on?',
-    [
+    message: [
       { id: uuidv4(), description: "Do yoga", category: "Health", completed: false },
       { id: uuidv4(), description: "Put on laundry", category: "Housework", completed: false },
       { id: uuidv4(), description: "Email Beckie", category: "Admin", completed: false }
