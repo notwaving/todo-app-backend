@@ -25,6 +25,18 @@ app.post('/tasks', function (req, res) {
   });
 })
 
+app.put('/tasks', function (req, res) {
+  res.json({
+    message: 'PUT displays task for editing by user'
+  });
+})
+
+app.delete('/tasks', function (req, res) {
+  res.json({
+    message: 'DELETE task from task list'
+  });
+})
+
 module.exports.tasks = serverless(app);
 
 
