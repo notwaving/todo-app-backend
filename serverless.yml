@@ -24,13 +24,13 @@ functions:
     handler: handler.tasks
     events:
       - http:
-          path: tasks/edit
+          path: tasks/edit/:tasKID
           method: put
           cors: true
   delete-tasks:
     handler: handler.tasks
     events:
       - http:
-          path: tasks/delete
+          path: tasks/delete/:taskID
           method: delete
           cors: true
