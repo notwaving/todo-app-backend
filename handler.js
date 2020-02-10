@@ -25,13 +25,13 @@ app.post('/tasks', function (req, res) {
   });
 })
 
-app.put('/tasks', function (req, res) {
+app.put('/tasks/edit', function (req, res) {
   res.json({
     message: 'PUT displays task for editing by user'
   });
 })
 
-app.delete('/tasks', function (req, res) {
+app.delete('/tasks/delete', function (req, res) {
   res.json({
     message: 'DELETE task from task list'
   });
