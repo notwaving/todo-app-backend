@@ -16,7 +16,7 @@ app.get('/tasks', function (req, res) {
 
   res.json({
     //message: 'Is this thing on?',
-    message: tasks
+    tasks: tasks
   });
 })
 
