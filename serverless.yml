@@ -13,3 +13,10 @@ functions:
           path: tasks
           method: get
           cors: true
+  post-tasks:
+    handler: handler.tasks
+    events:
+      - http:
+          path: tasks
+          method: post
+          cors: true
