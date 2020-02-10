@@ -13,23 +13,14 @@ functions:
           path: tasks
           method: get
           cors: true
-  post-tasks:
-    handler: handler.tasks
-    events:
       - http:
           path: tasks
           method: post
           cors: true
-  put-tasks:
-    handler: handler.tasks
-    events:
       - http:
           path: tasks/{taskID}
           method: put
           cors: true
-  delete-tasks:
-    handler: handler.tasks
-    events:
       - http:
           path: tasks/{taskID}
           method: delete
