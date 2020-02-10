@@ -13,10 +13,15 @@ const tasks = [
 
 app.get('/tasks', function (req, res) {
   //res.send('Hello World!'); - greyed out because res.json sets up headers the way we want.
-
   res.json({
     //message: 'Is this thing on?',
     tasks: tasks
+  });
+})
+
+app.post('/tasks', function (req, res) {
+  res.json({
+    message: 'POST user submitted task to the list of tasks on the page'
   });
 })
 
