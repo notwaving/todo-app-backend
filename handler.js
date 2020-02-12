@@ -1,20 +1,38 @@
 'use strict';
-const uuidv4 = require('uuid/v4');
 
 const serverless = require('serverless-http');
 const express = require('express');
 const app = express();
+const uuidv4 = require('uuid/v4');
+const mysql = require('mysql');
 
-const tasks = [
-  { id: uuidv4(), description: "Do yoga", category: "Health", completed: false },
-  { id: uuidv4(), description: "Put on laundry", category: "Housework", completed: false },
-  { id: uuidv4(), description: "Email Beckie", category: "Admin", completed: false }
-]
+const connection = mysql.createConnection({
+  host     : 'XXXX',
+  user     : 'XXXX',
+  password : 'XXXX',
+  database : 'XXXX'
+});
+
+// const tasks = [
+//   { id: uuidv4(), description: "Do yoga", category: "Health", completed: false },
+//   { id: uuidv4(), description: "Put on laundry", category: "Housework", completed: false },
+//   { id: uuidv4(), description: "Email Beckie", category: "Admin", completed: false }
+// ]
+
 // Retreives tasks
 app.get('/tasks', function (req, res) {
-  res.json({
-    tasks: tasks
+  connection.query('SELECT * FROM `tasks` WHERE `taskCompleted` = 0', function (error, results, fields) {
+    // error will be an Error if one occurred during the query
+    if(error) {
+      console.error("Your query had a problem with fetching tasks", error);
+      res.status(500).json({errorMessage: error}); 
+    }
+    else {
+      // Successful query 
+      res.json({tasks: results});
+    } 
   });
+  
 })
 
 // Creates tasks
