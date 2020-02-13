@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `tasks`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tasks` (
-  `taskID` varchar(16) NOT NULL,
+  `taskID` varchar(36) NOT NULL,
   `taskDescription` varchar(255) NOT NULL,
   `taskCategory` varchar(255) DEFAULT NULL,
   `taskCompleted` tinyint(1) DEFAULT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE `tasks` (
 
 LOCK TABLES `tasks` WRITE;
 /*!40000 ALTER TABLE `tasks` DISABLE KEYS */;
-INSERT INTO `tasks` VALUES ('1','Yoga','Health',0),('2','Food shop',NULL,0),('3','Do homework','School',1);
+INSERT INTO `tasks` VALUES ('7820cc14-4841-49aa-9b62-719b0496cb02','Yoga','Health',0),('e395d28f-f2a5-42e1-8181-75f3921b6bf0','Food shop',NULL,0),('fafcf701-0b96-4775-b9fb-2026ec6a4ba1','Do homework','School',1);
 /*!40000 ALTER TABLE `tasks` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-08 15:01:35
+-- Dump completed on 2020-02-13 17:08:50
