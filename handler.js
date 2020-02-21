@@ -3,6 +3,7 @@
 const serverless = require('serverless-http');
 const express = require('express');
 const app = express();
+app.use(espress.json());
 const uuidv4 = require('uuid/v4');
 const mysql = require('mysql');
 
@@ -37,8 +38,12 @@ app.get('/tasks', function (req, res) {
 
 // Creates tasks
 app.post('/tasks', function (req, res) {
+
+    const taskToInsert = req.body;
+
   res.json({
-    message: 'POST user submitted task to the list of tasks on the page'
+    message: 'POST user submitted task to the list of tasks on the page',
+    taskSaved : taskToInsert
   });
 })
 
