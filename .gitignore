@@ -6,4 +6,4 @@ jspm_packages
 .serverless
 
 #Ignore config
-.config.*.json
+config.*.json
