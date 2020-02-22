@@ -38,14 +38,25 @@ app.get('/tasks', function (req, res) {
 
 // Creates tasks
 app.post('/tasks', function (req, res) {
-
+    // Acceept info from client about what task is being created
     const taskToInsert = req.body;
+    taskToInsert.taskID = uuidv4();
+    // Take that information and pre-populate an SQL INSERT statement
+    // Execute the statement
+    connection.query('INSERT INTO `tasks` SET ?', taskToInsert, function (error, results, fields){
+      if(error) {
+        console.error("Your query had a problem with inserting a new task", error);
+        res.status(500).json({errorMessage: error}); 
+      }
+      else {
+        // Return info about the task that has been created to the client
+        res.json({
+          tasks: taskToInsert
+        });
+      } 
+    });
+});
 
-  res.json({
-    message: 'POST works!',
-    taskSaved:taskToInsert
-  });
-})
 
 // Updates tasks
 app.put('/tasks/:taskID', function (req, res) {
