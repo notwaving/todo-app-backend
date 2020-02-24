@@ -38,7 +38,7 @@ app.get('/tasks', function (req, res) {
 
 // Creates tasks
 app.post('/tasks', function (req, res) {
-    // Acceept info from client about what task is being created
+    // Accept info from client about what task is being created
     const taskToInsert = req.body;
     taskToInsert.taskID = uuidv4();
     // Take that information and pre-populate an SQL INSERT statement
@@ -57,16 +57,32 @@ app.post('/tasks', function (req, res) {
     });
 });
 
-
-// Updates tasks
+// Updates tasks by toggling 0 to 1 OR true to false
 app.put('/tasks/:taskID', function (req, res) {
-  res.json({
-    message: 'PUT displays task for editing by user'
-  });
-})
+  // Accept info from client about which task is being changed
+  const taskToUpdate = req.body;
+  taskToUpdate.taskID = uuidv4();
+  // Take that information and update the taskCompleted field from 0 to 1 and vice versa
+  // Execute the statement
+  connection.query('UPDATE `tasks` SET `taskCompleted` = 1 WHERE `taskID` = `taskToUpdate`', taskToUpdate, function (error, results, fields) {
+    if(error) {
+      console.error("Your query has a problem with updating a task", error);
+      res.status(500).json({errorMessage: error});
+    }
+    else {
+      res.json({
+        tasks: taskToUpdate
+      });
 
-// Deletes tasks
+    }
+  });
+  
+});
+
+// Deletes tasks 
 app.delete('/tasks/:taskID', function (req, res) {
+  // Accept info from client about which task is being changed
+  // Take that information and delete the task from the database
   res.json({
     message: 'DELETE task from task list'
   });
