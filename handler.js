@@ -60,18 +60,20 @@ app.post('/tasks', function (req, res) {
 // Updates tasks by toggling 0 to 1 OR true to false
 app.put('/tasks/:taskID', function (req, res) {
   // Accept info from client about which task is being changed
-  const taskToUpdate = req.body;
-  taskToUpdate.taskID = uuidv4();
+  const taskToUpdate = req.params.taskID;
+  //console.log(taskToUpdate);
+  // taskToUpdate.taskID = uuidv4();
   // Take that information and update the taskCompleted field from 0 to 1 and vice versa
   // Execute the statement
-  connection.query('UPDATE `tasks` SET `taskCompleted` = 1 WHERE `taskID` = `taskToUpdate`', taskToUpdate, function (error, results, fields) {
+  //connection.query('UPDATE `tasks` SET `taskCompleted` = 1 WHERE `taskID` = ?', taskToUpdate, function (error, results, fields) {
+    connection.query('UPDATE `tasks` SET `taskCompleted` = CASE WHEN taskCompleted = 0 THEN 1 ELSE 0 END WHERE `taskID` = ?', taskToUpdate, function (error, results, fields) {
     if(error) {
       console.error("Your query has a problem with updating a task", error);
       res.status(500).json({errorMessage: error});
     }
     else {
       res.json({
-        tasks: taskToUpdate
+        tasks: taskToUpdate 
       });
 
     }
@@ -83,10 +85,26 @@ app.put('/tasks/:taskID', function (req, res) {
 app.delete('/tasks/:taskID', function (req, res) {
   // Accept info from client about which task is being changed
   // Take that information and delete the task from the database
-  res.json({
-    message: 'DELETE task from task list'
+  const taskToDelete = req.params.taskID;
+
+  connection.query('DELETE FROM `tasks` WHERE `taskID` = ? LIMIT 1', taskToDelete, function (error, results, fields) {
+    if(error) {
+      console.error("Your query has a problem with deleting a task", error);
+      res.status(500).json({errorMessage: error});
+    }
+    else {
+      res.json({
+        tasks: taskToDelete
+      });
+
+    }
   });
-})
+  
+});
+  //res.json({
+    //message: 'DELETE task from task list'
+ // });
+//})
 
 module.exports.tasks = serverless(app);
 
