@@ -57,10 +57,10 @@ app.post('/tasks', function (req, res) {
 app.put('/tasks/:taskID', function (req, res) {
   // Accept info from client about which task is being changed.
   // req.params captures the taskID
-  const taskToUpdate = req.params.taskID;
+  const taskToEdit = req.params.taskID;
   // Take that information and update the taskCompleted field, toggling from 0 to 1
   // Execute conditional SQL statement for taskCompleted boolean: change 0 to 1, else 0
-    connection.query('UPDATE `tasks` SET `taskCompleted` = CASE WHEN taskCompleted = 0 THEN 1 ELSE 0 END WHERE `taskID` = ?', taskToUpdate, function (error, results, fields) {
+    connection.query('UPDATE `tasks` SET `taskCompleted` = CASE WHEN taskCompleted = 0 THEN 1 ELSE 0 END WHERE `taskID` = ?', taskToEdit, function (error, results, fields) {
     if(error) {
       console.error("Your query has a problem with updating a task", error);
       res.status(500).json({errorMessage: error});
